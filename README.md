@@ -1,4 +1,4 @@
-# Bin2Tif Extractor
+# Transformer Bin2Tif
 
 Stereo RGB Image Bin to GeoTIFF Converter.
 
