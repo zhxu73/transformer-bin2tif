@@ -21,12 +21,12 @@ def add_parameters(parser: argparse.ArgumentParser) -> None:
                         help='saves the intermediate image file before it\'s saved as a geotiff')
 
 # pylint: disable=unused-argument
-def check_continue(transformer: transformer_class.Transformer, check_md: dict, transformer_md: dict, full_md: dict) -> list:
+def check_continue(transformer: transformer_class.Transformer, check_md: dict, transformer_md: dict, full_md: dict) -> tuple:
     """Checks if conditions are right for continuing processing
     Arguments:
         transformer: instance of transformer class
     Return:
-        Returns a dictionary containining the return code for continuing or not, and
+        Returns a tuple containining the return code for continuing or not, and
         an error message if there's an error
     """
     have_file = False
