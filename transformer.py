@@ -56,21 +56,20 @@ def perform_process(transformer: transformer_class.Transformer, check_md: dict, 
     out_filename = os.path.splitext(os.path.basename(source_file))[0] + '.tif'
     out_file = os.path.join(check_md['working_folder'], out_filename)
     
-    bin_type = 'left' if source_file.endswith('_left.bin') else 'right' if source_file.endswith('_right.bin') else None
-    if not bin_type:
-        msg = "Bin file must be a left or right file: '%s'" % source_file
-        logging.error(msg)
-        logging.error("    Returning an error")
-        return {'code': -1000, 'error': msg}
+    # Hard coded ps2Top
+    bin_type = 'ps2Top'
     logging.debug("Source image is type: %s", bin_type)
 
     # Process the file
     try:
-        bin_shape = terraref.stereo_rgb.get_image_shape(check_md['context_md'], bin_type)
+        # Hard coded width, height
+        # Should be able to get from raw metadata
+        bin_shape = (1936, 1216)
         gps_bounds_bin = tr_geojson_to_tuples(check_md['context_md']['spatial_metadata'][bin_type]['bounding_box'])
     except KeyError:
         msg = "Spatial metadata is not properly identified. Unable to continue"
         logging.error(msg)
+        raise
         return {'code': -1001, 'error': msg}
     logging.debug("Image bounds are: %s", str(gps_bounds_bin))
 
